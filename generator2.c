@@ -6,35 +6,38 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[], char *envp[]) {
-    int minInt = 0;
+    //int minInt = 0;
     int maxInt = 99;
-    int seed = time(0);
-    int arrayLoc[10000];
-    int array80[10000];
-    int arrayLoop[10000];
+    int* arrayLoc = (int*) malloc(10000 * sizeof(int));
+    int* array80 = (int*) malloc(10000 * sizeof(int));
+    int* arrayLoop = (int*) malloc(10000 * sizeof(int));
 
-    //no locality
+    // no locality
+    for(int i = 0; i < 10000; i++) arryLoc[i] = rand() % 100;
+
+    // 80-20
+    for(int i = 0; i < 8000; i++) array80[i] = rand() % 20;
+    for(int i = 0; i < 2000; i++) array80[i+8000] = rand() % (maxInt-20+1)+20;
+    // Mix values together
     for(int i = 0; i < 10000; i++) {
-        int r = rand() % (maxInt + 1 - minInt) + minInt;
-        arrayLoc[i]=r;
+        int index = rand() % 10000;
+        int x = array80[i];
+        array80[i] = array80[index];
+        array80[index] = array80[x];
     }
 
-    //80-20
-    for(int i=0; i<8000; i++) {
-	int r = rand() % (19 + 1 - minInt) + minInt;
-	array80[i]=r;
-    }
-    for(int i = 0; i < 2000; i++) {
-	int r = rand() % (maxInt + 1 - 20) + 20;
-	array80[i+8000]=r;
-    }
-
-    //looping
-    for(int j = 0; j < 100; j++) {
-        for(int i = 0; i < 100; i++) {
-	    arrayLoop[i]=i;
+    // looping
+    for(int i = 0; i < 200; i++) {
+        for(int j = 0; j < 50; j++) {
+	    arrayLoop[i*50+j] = j;
 	}
     }
+
+    printf("--- No Locality ---\n");
+
+    printf("--- 80-20 ---\n");
+
+    printf("--- Looping ---\n");
 
     return 0;
 }
