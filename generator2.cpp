@@ -15,8 +15,6 @@ struct CEntry {
     int time;
 };
 
-// TODO Add OPT
-// TODO Add LRU
 double* FIFO(int*);
 double* Rand(int*);
 double* Clock(int*);
@@ -56,10 +54,6 @@ int main(int argc, char *argv[]) {
     // print results for all runs to populate tables
     cout << "--- No Locality ---\n" << endl;
 
-    // OPT
-
-    // LRU
-
     // FIFO
     output = FIFO(arrayLoc);
     cout << "FIFO:\t";
@@ -73,10 +67,6 @@ int main(int argc, char *argv[]) {
     cout << "\n" << endl;
 
     cout << "--- 80-20 ---\n" << endl;
-
-    // OPT
-
-    // LRU
 
     // FIFO
     output = FIFO(array80);
@@ -97,10 +87,6 @@ int main(int argc, char *argv[]) {
     cout << "\n" << endl;
 
     cout << "--- Looping ---\n" << endl;
-
-    // OPT
-
-    // LRU
 
     // FIFO
     output = FIFO(arrayLoop);
