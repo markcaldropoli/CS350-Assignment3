@@ -55,7 +55,7 @@ int optimalReplacement(int *array, int memSize)
 				{
 					temp[x]=-1;
 
-					for(int y=i+1; y<memSize; y++)
+					for(int y=i+1; y<pages; y++)
 					{
 						if(array2[x]==array[y])
 						{
